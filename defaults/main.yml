@@ -69,7 +69,7 @@ graphite_relay_destinations:               127.0.0.1:2004
 graphite_relay_line_receiver_interface:    0.0.0.0
 graphite_relay_line_receiver_port:         2013
 graphite_relay_log_listener_connections:   true
-graphite_relay_max_datapoints_per_message: 500 
+graphite_relay_max_datapoints_per_message: 500
 graphite_relay_max_queue_size:             10000
 graphite_relay_pickle_receiver_interface:  0.0.0.0
 graphite_relay_pickle_receiver_port:       2014
@@ -99,3 +99,20 @@ graphite_aggregator_write_back_frequency:       0
 
 # Optional extra options for uwsgi_graphite.ini
 uwsgi_graphite_extraopts: []
+
+graphite_storage_aggregations:
+  -
+    name: min
+    pattern: \.min$
+    x_files_factor: 0.1
+    aggregation_method: min
+  -
+    name: max
+    pattern: \.max$
+    x_files_factor: 0.1
+    aggregation_method: max
+  -
+    name: sum
+    pattern: \.count$
+    x_files_factor: 0
+    aggregation_method: sum

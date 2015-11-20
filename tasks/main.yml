@@ -18,6 +18,7 @@
     - whisper
     - carbon
     - graphite-web
+    - pytz
     - "django==1.5" # Current version of graphite do not support 1.6
     - "django-tagging==0.3.6" # Never versions require Django 1.7+
   environment:
@@ -37,6 +38,10 @@
 
 - name: Install storage schemas
   template: src=storage-schemas.conf.j2 dest={{ graphite_install_path }}/conf/storage-schemas.conf
+  notify: restart carbon-cache
+
+- name: Install aggregation schema
+  template: src=storage-aggregation.conf.j2 dest={{ graphite_install_path }}/conf/storage-aggregation.conf
   notify: restart carbon-cache
 
 - name: Install uwsgi
